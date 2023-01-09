@@ -138,12 +138,10 @@ class AES_CTR_pycrypto(object):
         cnt  : uint64, 8 least significant bytes value of the counter
                default is 0
         """
-        self.cnt_hi = nonce
-        self.cnt_lo = cnt
         self.aes = AES_pycrypto.new(
             key,
             AES_pycrypto.MODE_CTR,
-            counter=Counter_pycrypto.new(64, prefix=self.cnt_hi, initial_value=0))
+            counter=Counter_pycrypto.new(64, prefix=nonce, initial_value=cnt))
     
     def encrypt(self, data):
         """encrypt / decrypt data with the key and IV set at initialization"""
